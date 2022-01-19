@@ -125,7 +125,7 @@
 [test.db.getManyWithKeys works] with DB X
 (let one = DB.set_v1 { x = "foo" } "one" X in
  let two = DB.set_v1 { x = "bar" } "two" X in
- DB.getManyWithKeys_v0 ["one"; "two"] X) = [["one"; { x = "foo" }];["two"; { x = "bar" }]]
+ (DB.getManyWithKeys_v0 ["one"; "two"] X)) |> List.sortBy (fun v -> List.head_v0_ster v) = [["one"; { x = "foo" }];["two"; { x = "bar" }]]
 
 [test.db.getManyWithKeys_v1 works] with DB X
 (let one = DB.set_v1 { x = "foo" } "one" X in
@@ -144,12 +144,12 @@
 [test.db.getMany_v1 works] with DB X
 (let one = DB.set_v1 { x = "foo" } "one" X in
  let two = DB.set_v1 { x = "bar" } "two" X in
- DB.getMany_v1 ["one"; "two"] X) = [["one"; { x = "foo" }];["two"; { x = "bar" }]]
+ (DB.getMany_v1 ["one"; "two"] X) |> List.sortBy (fun v -> List.head_v0_ster v)) = [["one"; { x = "foo" }];["two"; { x = "bar" }]]
 
 [test.db.getMany_v2 works] with DB X
 (let one = DB.set_v1 { x = "foo" } "one" X in
  let two = DB.set_v1 { x = "bar" } "two" X in
- DB.getMany_v2 ["one"; "two"] X) = [ { x = "foo"}; { x = "bar"}]
+ (DB.getMany_v2 ["one"; "two"] X) |> List.sortBy (fun v -> v.x)) = [ { x = "bar"}; { x = "foo"}]
 
 [test.db.getMany_v3 returns nothing] with DB X
 (let one = DB.set_v1 { x = "foo" } "one" X in
