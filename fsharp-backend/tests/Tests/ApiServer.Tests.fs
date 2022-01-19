@@ -713,7 +713,14 @@ let localOnlyTests =
         testWorkerStats
         testInitialLoadReturnsTheSame
         testInsertDeleteSecrets
-        testPostApi "packages" "" (deserialize<Packages.List.T>) ident
+        testPostApi
+          "packages"
+          ""
+          (fun json ->
+            json
+            |> deserialize<Packages.List.T>
+            |> List.sortBy (fun (p : OT.PackageManager.fn) -> p.tlid))
+          ident
         // TODO upload_package
         testTriggerHandler
         // FSTODO worker_schedule
